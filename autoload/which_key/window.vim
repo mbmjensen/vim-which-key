@@ -57,7 +57,7 @@ endfunction
 
 function! s:show_popup(rows) abort
   if !exists('s:popup_id')
-    let s:popup_id = popup_create([], {'highlight': 'WhichKeyFloating'})
+    let s:popup_id = popup_create([], {'highlight': 'WhichKeyFloating', 'border': [], 'borderchars': ['─', '│', '─', '│', '╭', '╮', '╯', '╰']})
     call popup_hide(s:popup_id)
     call setbufvar(winbufnr(s:popup_id), '&filetype', 'which_key')
     call win_execute(s:popup_id, 'setlocal nonumber nowrap')
@@ -70,7 +70,7 @@ function! s:show_popup(rows) abort
     let maxwidth = winwidth(g:which_key_origin_winid) - offset
   else
     let col = offset + 1
-    let maxwidth = &columns - offset
+    let maxwidth = &columns - offset - 2
   endif
   call popup_move(s:popup_id, {
           \ 'col': col,
